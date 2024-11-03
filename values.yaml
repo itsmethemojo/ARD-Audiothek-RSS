@@ -1,0 +1,23 @@
+app:
+  fullnameOverride: "ard-audiothek-rss"
+
+  image:
+    repository: php
+    tag: 8.2-apache
+
+  extraVolumeMounts:
+    - name: html
+      mountPath: /var/www/html/
+
+  extraVolumes:
+    - name: html
+      configMap:
+        name: ard-audiothek-rss-html
+
+  livenessProbe:
+    httpGet:
+      path: /ardaudiothek-rss.php
+
+  readinessProbe:
+    httpGet:
+      path: /ardaudiothek-rss.php
